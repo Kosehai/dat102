@@ -41,6 +41,20 @@ public class TestFilmarkiv2 {
     }
 
     @Test
+    public void testslettFilm(){
+        Filmarkiv2 arkiv = new Filmarkiv2();
+        Film testfilm2 = new Film(13, "Test Prod2", "Dette er tittel 2", 1992, Sjanger.DRAMA, "Test Selskap2");
+        Film testfilm3 = new Film(14, "Test Prod3", "Her er en til", 1993, Sjanger.HISTORY, "Test Selskap3");
+    
+        arkiv.leggTilFilm(testfilm);
+        arkiv.leggTilFilm(testfilm2);
+        arkiv.leggTilFilm(testfilm3);
+        int antall = arkiv.antall() - 1;
+        arkiv.slettFilm(testfilm3.getFilmnr());
+        assertEquals(antall, arkiv.antall());
+    }
+
+    @Test
     public void testsoekTittel(){
         Filmarkiv2 arkiv = new Filmarkiv2();
         Film testfilm2 = new Film(10, "Test Prod2", "Dette er tittel 2", 1992, Sjanger.DRAMA, "Test Selskap2");

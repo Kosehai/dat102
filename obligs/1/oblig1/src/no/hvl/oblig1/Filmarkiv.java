@@ -22,7 +22,10 @@ public class Filmarkiv implements FilmarkivADT{
             }
         }
 
-        if(fanntnr) filmer = nyfilmer;
+        if(fanntnr){
+            filmer = nyfilmer;
+            antall--;
+        } 
         return fanntnr;
     }
 

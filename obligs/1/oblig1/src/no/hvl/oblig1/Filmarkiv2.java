@@ -59,7 +59,7 @@ public class Filmarkiv2 implements FilmarkivADT {
         for(int i=0;i<filmlist.size();i++){
             returliste[i] = filmlist.get(i);
         }
-        
+
         return returliste;
     }
 
@@ -79,8 +79,31 @@ public class Filmarkiv2 implements FilmarkivADT {
 
     @Override
     public boolean slettFilm(int filmnr) {
-        // TODO Auto-generated method stub
-        return false;
+        boolean slettet = false;
+        if(forstenode.getElement() == null) return false;
+        if(forstenode.getElement().getFilmnr() == filmnr){
+            if(forstenode.getNeste() == null) {
+                forstenode = new LinearNode<Film>();
+                slettet = true;
+            }
+            forstenode = forstenode.getNeste();
+            slettet = true;
+        } else {
+            boolean sistenode = false;
+            LinearNode<Film> film = forstenode;
+            while(sistenode == false){
+                if(film.getNeste() == null) {
+                    slettet = false;
+                } else if(film.getNeste().getElement().getFilmnr() == filmnr){
+                    film.setNeste(film.getNeste().getNeste());
+                    slettet = true;
+                }
+                film = film.getNeste();
+                if(film == null || slettet) sistenode = true;
+            }
+        }
+        if(slettet) antall--;
+        return slettet;
     }
 
     @Override
