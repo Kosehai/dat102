@@ -78,7 +78,3 @@ public class Film {
         return String.format("[nr: %d, {tittel: %s, filmselskap: %s, år: %s, sjanger: %s}]", getFilmnr(), getTittel(), getFilmselskap(), getYear(), getSjanger().toString());
     }
 }
-
-enum Sjanger{
-    
-}
