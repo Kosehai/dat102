@@ -1,3 +1,5 @@
+package no.hvl.oblig1;
+
 public interface FilmarkivADT { 
     /** 
      * Viser en film 
@@ -10,7 +12,14 @@ public interface FilmarkivADT {
      * Legger til en ny film. 
      * @param nyFilm 
      */ 
-    void leggTilFilm(Film nyFilm); 
+    void leggTilFilm(Film nyFilm);
+
+    /**
+     * Sjekker om film er i arkiv.
+     * @param filmnr
+     * @return Om filmen finnes.
+     */
+    boolean finnFilm(int filmnr);
     
     /** 
      * Sletter en fil med gitt nr 

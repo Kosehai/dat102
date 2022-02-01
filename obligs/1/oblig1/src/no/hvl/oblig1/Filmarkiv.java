@@ -1,3 +1,5 @@
+package no.hvl.oblig1;
+
 public class Filmarkiv implements FilmarkivADT{
 
     private Film[] filmer;
@@ -48,6 +50,14 @@ public class Filmarkiv implements FilmarkivADT{
     }
 
     @Override
+    public boolean finnFilm(int filmnr) {
+        for(Film f : filmer){
+            if(f.getFilmnr() == filmnr) return true;
+        }
+        return false;
+    }
+
+    @Override
     public Film[] soekTittel(String delstreng) {
         Film[] delfilmer = new Film[antall];
         int size = 0;
@@ -57,14 +67,14 @@ public class Filmarkiv implements FilmarkivADT{
                 delfilmer[size++] = filmer[i];
             }
         }
-        trimtabell(delfilmer, size);
+        delfilmer = trimtabell(delfilmer, size);
         return delfilmer;
     }
 
     @Override
     public void leggTilFilm(Film nyFilm) {
         if(antall > filmer.length) utvidtabell(filmer);
-        filmer[antall] = nyFilm;
+        filmer[antall++] = nyFilm;
     }
 
     private void utvidtabell(Film[] tabell){
@@ -75,11 +85,11 @@ public class Filmarkiv implements FilmarkivADT{
         tabell = nytabell;
     }
 
-    private void trimtabell(Film[] tabell, int size){
+    private Film[] trimtabell(Film[] tabell, int size){
         Film[] nytabell = new Film[size];
-        for(int i=0;i<tabell.length;i++){
+        for(int i=0;i<nytabell.length;i++){
             nytabell[i] = tabell[i];
         }
-        tabell = nytabell;
+        return nytabell;
     }
 }

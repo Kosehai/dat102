@@ -1,3 +1,5 @@
+package no.hvl.oblig1;
+
 public enum Sjanger {
 	ACTION, DRAMA, HISTORY, SCIFI;
 	

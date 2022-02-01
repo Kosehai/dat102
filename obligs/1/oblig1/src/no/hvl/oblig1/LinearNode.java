@@ -1,3 +1,4 @@
+package no.hvl.oblig1;
 
 /**
  * Representerer en node.
