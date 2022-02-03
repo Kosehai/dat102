@@ -7,7 +7,6 @@ Besvarelse for oppgave 2 ligger i PDF "oppgave2.pdf"
 ### Gruppe 22.
 \
 \
-
 i)
 
 ### Oppgave 4 besvarelse
