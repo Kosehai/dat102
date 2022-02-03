@@ -1,4 +1,4 @@
-#Oblig 1
+# Oblig 1
 
 Tester for alt finner du under src/tester, må ha det under src mappen ellers så blir ikkje vscode så glad.
 
