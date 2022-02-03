@@ -29,8 +29,7 @@ public void popFromEmptyIsUnderflowed() {
     });
 }
 ```
-```
+
 På punkt i) legger testen til et element i stacken og popper det ut for å sjekke om stack er tom. Det er også plassert inni try catch blocker og kaller funksjonen fail om det kommen en uventet feil.
 
 På punkt ii) bruker testen Junit sin aseertThrows for å sjekke om funksjonen den kaller kaster en feilmelding.
-```
