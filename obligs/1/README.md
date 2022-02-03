@@ -5,11 +5,7 @@ Tester for alt finner du under src/tester, må ha det under src mappen ellers s�
 Besvarelse for oppgave 2 ligger i PDF "oppgave2.pdf"
 
 ### Gruppe 22.
-\
-\
-i)
-
-### Oppgave 4 besvarelse
+## Oppgave 4 besvarelse
 ```java
 Se på de 2 test-metodene under. Hva uttrykker de?
 
