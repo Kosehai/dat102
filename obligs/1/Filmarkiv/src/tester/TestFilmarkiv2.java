@@ -1,6 +1,7 @@
 package tester;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 import org.junit.Test;
 
@@ -50,8 +51,11 @@ public class TestFilmarkiv2 {
         arkiv.leggTilFilm(testfilm2);
         arkiv.leggTilFilm(testfilm3);
         int antall = arkiv.antall() - 1;
-        arkiv.slettFilm(testfilm3.getFilmnr());
+        boolean slettet = arkiv.slettFilm(testfilm3.getFilmnr());
         assertEquals(antall, arkiv.antall());
+        assertEquals(true, slettet);
+        boolean slettet2 = arkiv.slettFilm(100);
+        assertEquals(false, slettet2);
     }
 
     @Test
@@ -66,7 +70,10 @@ public class TestFilmarkiv2 {
 
         Film[] sok1 = arkiv.soekTittel("Test Tittel");
         Film[] sok2 = arkiv.soekTittel("Dette er");
-        Film[] sok3 = arkiv.soekTittel("er en til");
+        Film[] sok3 = arkiv.soekTittel("Her er");
+        assertNotEquals(0, sok1.length);
+        assertNotEquals(0, sok2.length);
+        assertNotEquals(0, sok3.length);
         for(Film f : sok1){
             assertEquals(testfilm, f);
         }

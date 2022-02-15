@@ -1,7 +1,5 @@
 package no.hvl.oblig1;
 
-import java.util.Set;
-
 public class Film {
     private int filmnr;
     private String produsent;
@@ -91,7 +89,7 @@ public class Film {
 
     @Override
     public String toString() {
-        return String.format("[nr: %d, {tittel: %s, filmselskap: %s, år: %s, sjanger: %s}]", getFilmnr(), getTittel(),
-                getFilmselskap(), getYear(), getSjanger().toString());
+        return String.format("[nr: %d, {tittel: %s, filmselskap: %s, år: %s, sjanger: %s, produsent: %s}]", getFilmnr(), getTittel(),
+                getFilmselskap(), getYear(), getSjanger().toString(), getProdusent());
     }
 }

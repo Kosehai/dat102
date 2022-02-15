@@ -1,17 +1,12 @@
 package no.hvl.oblig1;
 
-import java.util.List;
-import java.util.ArrayList;
-
 public class Filmarkiv2 implements FilmarkivADT {
 
     LinearNode<Film> forstenode;
-    LinearNode<Film> sistenode;
     int antall;
 
     public Filmarkiv2(){
         forstenode = new LinearNode<Film>();
-        sistenode = forstenode;
         antall = 0;
     }
 
@@ -24,11 +19,9 @@ public class Filmarkiv2 implements FilmarkivADT {
     public int antall(Sjanger sjanger) {
         int count = 0;
         LinearNode<Film> film = forstenode;
-        boolean sistenode = false;
-        while(sistenode == false){
+        while(film != null){
             if(film.getElement().getSjanger() == sjanger) count++;
             film = film.getNeste();
-            if(film == null) sistenode = true;
         }
         return count;
     }
@@ -36,7 +29,7 @@ public class Filmarkiv2 implements FilmarkivADT {
     @Override
     public void visFilm(int nr) {
         LinearNode<Film> film = forstenode;
-        while(film.getNeste() != null){
+        while(film != null){
             if(film.getElement().getFilmnr() == nr) film.getElement().toString();
             film = film.getNeste();
         }
@@ -44,20 +37,22 @@ public class Filmarkiv2 implements FilmarkivADT {
 
     @Override
     public Film[] soekTittel(String delstreng) {
-        List<Film> filmlist = new ArrayList<Film>();
-        
+        Film[] filmliste = new Film[antall];
+        int c = 0;
+
         LinearNode<Film> film = forstenode;
-        boolean sistenode = false;
-        while(sistenode == false){
+        while(film != null){
             String tittel = film.getElement().getTittel();
-            if(tittel.contains(delstreng)) filmlist.add(film.getElement());
+            if(tittel.contains(delstreng)){
+                filmliste[c++] = film.getElement();
+            } 
             film = film.getNeste();
-            if(film == null) sistenode = true;
         }
-        
-        Film[] returliste = new Film[filmlist.size()];
-        for(int i=0;i<filmlist.size();i++){
-            returliste[i] = filmlist.get(i);
+
+        Film[] returliste = new Film[c];
+        //trim array
+        for(int i=0;i<c;i++){
+            returliste[i] = filmliste[i];
         }
 
         return returliste;
@@ -71,39 +66,34 @@ public class Filmarkiv2 implements FilmarkivADT {
             return;
         }
         LinearNode<Film> nynode = new LinearNode<Film>(nyFilm);
-        
-        sistenode.setNeste(nynode);
-        sistenode = nynode;
+        LinearNode<Film> neste = forstenode;
+        while(neste.getNeste() != null){
+            neste = neste.getNeste();
+        }
+        neste.setNeste(nynode);
         antall++;
     }
 
     @Override
     public boolean slettFilm(int filmnr) {
-        boolean slettet = false;
-        if(forstenode.getElement() == null) return false;
-        if(forstenode.getElement().getFilmnr() == filmnr){
-            if(forstenode.getNeste() == null) {
-                forstenode = new LinearNode<Film>();
-                slettet = true;
-            }
-            forstenode = forstenode.getNeste();
-            slettet = true;
-        } else {
-            boolean sistenode = false;
-            LinearNode<Film> film = forstenode;
-            while(sistenode == false){
-                if(film.getNeste() == null) {
-                    slettet = false;
-                } else if(film.getNeste().getElement().getFilmnr() == filmnr){
-                    film.setNeste(film.getNeste().getNeste());
-                    slettet = true;
-                }
-                film = film.getNeste();
-                if(film == null || slettet) sistenode = true;
-            }
+        LinearNode<Film> neste, forrige = null;
+        neste = forstenode;
+        //Vist første node er den som skal slettest
+        if(neste != null && neste.getElement().getFilmnr() == filmnr){
+            forstenode = neste.getNeste();
         }
-        if(slettet) antall--;
-        return slettet;
+
+        while(neste != null && neste.getElement().getFilmnr() != filmnr){
+            forrige = neste;
+            neste = neste.getNeste();
+        }
+        //returnerer false om vi ikkje finner noen node med filmnr
+        if(neste == null)
+            return false;
+
+        forrige.setNeste(neste.getNeste());
+        antall--;
+        return true;
     }
 
     @Override
@@ -116,6 +106,17 @@ public class Filmarkiv2 implements FilmarkivADT {
             if(film == null) sistenode = true;
         }
         return false;
+    }
+
+    @Override
+    public String toString() {
+        String outstring = "";
+        LinearNode<Film> neste = forstenode;
+        while(neste != null){
+            outstring += neste.getElement().toString();
+            neste = neste.getNeste();
+        }
+        return outstring;
     }
     
 }

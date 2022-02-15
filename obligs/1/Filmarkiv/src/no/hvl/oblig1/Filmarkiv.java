@@ -10,23 +10,28 @@ public class Filmarkiv implements FilmarkivADT{
         antall = 0;
     }
 
+    public Filmarkiv(int size){
+        filmer = new Film[size];
+        antall = 0;
+    }
+
     @Override
     public boolean slettFilm(int filmnr) {
-        Film[] nyfilmer = new Film[antall-1];
-        boolean fanntnr = false;
-        for(int i = 0, j = 0; i<antall; i++){
-            if(filmer[i].getFilmnr() != filmnr){
-                nyfilmer[j++] = filmer[i];
-            } else {
-                fanntnr = true;
+        /*
+        Dette er raskeste måten å slette fra arrayen på,
+        men den er kanskje ikkje helt "rett" siden den ødelegger rekkefølgen på arrayen.
+        men siden dette arkivet ikkje er avhenging av rekkefølgen på noen måte går det fint.
+        */
+        boolean slettet = false;
+        int i = 0;
+        while(slettet == false && i<antall){
+            if(filmer[i++].getFilmnr() == filmnr){
+                filmer[i] = filmer[antall];
+                filmer[antall--] = null;
+                slettet = true;
             }
         }
-
-        if(fanntnr){
-            filmer = nyfilmer;
-            antall--;
-        } 
-        return fanntnr;
+        return slettet;
     }
 
     @Override
@@ -94,5 +99,14 @@ public class Filmarkiv implements FilmarkivADT{
             nytabell[i] = tabell[i];
         }
         return nytabell;
+    }
+
+    @Override
+    public String toString() {
+        String outstring = "";
+        for(int i=0;i<antall;i++){
+            outstring += filmer[i].toString();
+        }
+        return outstring;
     }
 }
