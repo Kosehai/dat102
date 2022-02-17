@@ -17,11 +17,12 @@ public class DobbelKjedet {
     }
 
     public void leggtil(int n){
+        if(n < first.getAntall() || n > last.getAntall()) return;
         Node nynode = new Node();
         nynode.setAntall(n);
-        Node neste = first;
+        Node neste = last;
         while(neste != null){
-            if(neste.getAntall() < n){
+            if(n > neste.getAntall()){
                 Node temp = neste.getNext();
                 neste.setNext(nynode);
                 nynode.setPrev(neste);
@@ -29,16 +30,16 @@ public class DobbelKjedet {
                 temp.setPrev(nynode);
                 break;
             }
-            neste = neste.getNext();
+            neste = neste.getPrev();
         }
     }
 
-    public boolean fins(Node n){
+    public boolean fins(int n){
         boolean finnes = false;
         Node neste = first;
         while(neste.getNext() != null){
             neste = neste.getNext();
-            if(neste == n){
+            if(neste.getAntall() == n){
                 finnes = true;
                 break;
             }
@@ -51,8 +52,11 @@ public class DobbelKjedet {
         Node neste = first;
         while(neste.getNext() != null){
             neste = neste.getNext();
-            outstring += neste.getAntall() + " -> ";
+            if(neste.getAntall() != last.getAntall()){
+                outstring += neste.getAntall() + " -> ";
+            }
         }
+        outstring = outstring.substring(0, outstring.length() - 4);
         System.out.println(outstring);
     }
 
