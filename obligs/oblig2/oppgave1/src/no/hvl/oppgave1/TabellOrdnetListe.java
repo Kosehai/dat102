@@ -75,8 +75,7 @@ public class TabellOrdnetListe<T extends Comparable<T>> implements OrdnetListeAD
 
         @Override
         public void leggTil(T element) {
-            liste[bak] = element;
-            bak = bak + 1;
+            liste[bak++] = element;
             //Insertion sort
             Arrays.sort(liste);
         }
