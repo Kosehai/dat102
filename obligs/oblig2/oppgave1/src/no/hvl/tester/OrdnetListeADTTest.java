@@ -79,6 +79,7 @@ public abstract class OrdnetListeADTTest {
 		liste.leggTil(e0);
 		liste.leggTil(e4);
 		liste.leggTil(e3);
+        System.out.println("" + liste.foerste());
 		assertEquals(e5, liste.fjernSiste());
 	}
 

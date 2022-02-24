@@ -1,5 +1,7 @@
 package no.hvl.oppgave1;
 
+import javax.swing.text.StyledEditorKit.ForegroundAction;
+
 //https://www.youtube.com/watch?v=m3SQs3fb_0g&ab_channel=MicrosoftDeveloper
 /*Ferdigstill klassene KjedetOrdnetListe og TabellOrdnetListe. Ferdigstill også
 testmetodene. Kjør testmetoden og se at du får grønt.*/
@@ -43,6 +45,13 @@ public class KjedetOrdnetListe<T extends Comparable<T>>
     if (erTom()) throw new EmptyCollectionException("ordnet liste");
 
     T resultat = siste.getElement();
+    LinearNode<T> neste, forrige = null; neste = foerste;
+    while(neste.getNeste() != null){
+        forrige = neste;
+        neste = neste.getNeste();
+    }
+    forrige.setNeste(null);
+    siste = forrige;
     return resultat;
   }
 
@@ -76,7 +85,33 @@ public class KjedetOrdnetListe<T extends Comparable<T>>
 
   @Override
   public void leggTil(T element) {
-    // ...Fyll ut
+    LinearNode<T> nynode = new LinearNode<>();
+    nynode.setElement(element);
+    if(antall == 0){
+        foerste = nynode;
+        antall++;
+        return;
+    }
+    
+    if(foerste.getElement().compareTo(element) <= 0){
+        nynode.setNeste(foerste);
+        foerste = nynode;
+        antall++;
+        return;
+    }
+
+    LinearNode<T> neste, forrige = null; neste = foerste;
+    
+    while(neste != null && neste.getElement().compareTo(element) >= 0){
+        forrige = neste;
+        neste = neste.getNeste();
+    }
+
+    forrige.setNeste(nynode);
+    nynode.setNeste(neste);
+    if(nynode.getNeste() == null)
+        siste = nynode;
+    antall++;
   }
 
   @Override
@@ -107,9 +142,11 @@ public class KjedetOrdnetListe<T extends Comparable<T>>
 
   @Override
   public boolean inneholder(T element) {
+    if(element.equals(foerste.getElement()))
+        return true;
     LinearNode<T> denne = foerste;
     boolean resultat = false;
-    while (denne != null && element.compareTo(denne.getElement()) > 0) {
+    while (denne != null && !(element.equals(denne.getElement()))) {
       denne = denne.getNeste();
     }
     if (denne != null) {
@@ -118,5 +155,18 @@ public class KjedetOrdnetListe<T extends Comparable<T>>
       }
     } // ikke-funn
     return resultat;
+  }
+
+
+  @Override
+  public String toString() {
+    String outstring = "";  
+    LinearNode<T> neste = foerste;
+      while(neste != null){
+          outstring = neste.getElement().toString() + outstring;
+          neste = neste.getNeste();
+      }
+
+      return outstring;
   }
 } // class
