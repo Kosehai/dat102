@@ -6,6 +6,14 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch KlientDobbelKjedetListe",
+            "request": "launch",
+            "mainClass": "no.hvl.dat102.klient.KlientDobbelKjedetListe",
+            "projectName": "oppgave2_64c20dea",
+            "console": "integratedTerminal"
+        },
+        {
+            "type": "java",
             "name": "Launch Current File",
             "request": "launch",
             "mainClass": "${file}",
