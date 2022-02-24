@@ -24,8 +24,9 @@ public class TabellOrdnetListe<T extends Comparable<T>> implements OrdnetListeAD
                 if (erTom())
                         throw new EmptyCollectionException("ordnet liste");
 
-                T resultat = liste[liste.length];
-                liste[liste.length] = null;
+                T resultat = liste[bak-1];
+                liste[bak-1] = null;
+                bak--;
                 return resultat;
         }
 
@@ -76,8 +77,20 @@ public class TabellOrdnetListe<T extends Comparable<T>> implements OrdnetListeAD
         @Override
         public void leggTil(T element) {
             liste[bak++] = element;
-            //Insertion sort
-            Arrays.sort(liste);
+            sorter();
+        }
+
+        void sorter(){
+            for(int i=1; i<bak; ++i){
+                T key = liste[i];
+                int j = i - 1;
+
+                while(j >= 0 && key.compareTo(liste[j]) <= 0){
+                    liste[j + 1] = liste[j];
+                    j = j - 1;
+                }
+                liste[j + 1] = key;
+            }
         }
 
         @Override
@@ -87,15 +100,17 @@ public class TabellOrdnetListe<T extends Comparable<T>> implements OrdnetListeAD
 
         @Override
         public T fjern(T element) {
-            T[] nyliste = (T[]) (new Comparable[bak-1]);
-            for(int i = 0, j = 0; i<bak; i++){
-                if(liste[i] != element) 
-                {
-                    nyliste[j++] = liste[i];
+            T returnElm = null;
+            for(int i = 0; i < bak; i++){
+                if(liste[i] != null && liste[i].equals(element)){
+                    liste[i] = null;
+                    liste[i] = liste[--bak];
+                    returnElm = element;
+                    break;
                 }
             }
-            liste = nyliste;
-            return element;
+            sorter();
+            return returnElm;
         }
         //Itterasjons basert biner søk O = log n
         private int finn(T el) {
@@ -104,8 +119,11 @@ public class TabellOrdnetListe<T extends Comparable<T>> implements OrdnetListeAD
             int r = bak;
             while(l != r){
                 int mid = (l + r)/2;
-                if(liste[mid] == el){
+                if(liste[mid].equals(el)){
                     return mid;
+                }
+                if(liste[mid+1] != null && liste[mid+1].equals(el)){
+                    return mid+1;
                 }
                 if(el.compareTo(liste[mid]) > 0){
                     l = mid + 1;

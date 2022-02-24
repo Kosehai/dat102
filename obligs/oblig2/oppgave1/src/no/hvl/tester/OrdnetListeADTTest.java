@@ -73,8 +73,13 @@ public abstract class OrdnetListeADTTest {
 	 */
 	@Test
 	public final void viseOrdnetIkkeAvtagende() {
-		// ... Fyll ut
-		// ... Legg til elementer og bruk fjernFoerste
+		liste.leggTil(e1);
+		liste.leggTil(e2);
+		liste.leggTil(e5);
+		liste.leggTil(e0);
+		liste.leggTil(e4);
+		liste.leggTil(e3);
+		assertEquals(e5, liste.fjernSiste());
 	}
 
 	@Test
@@ -98,7 +103,12 @@ public abstract class OrdnetListeADTTest {
 	 */
 	@Test
 	public final void leggTilOgfjernMedDuplikater() {
-		// ... Fyll ut med � legge til passende elementer
+		liste.leggTil(e0);
+		liste.leggTil(e1);
+		liste.leggTil(e4);
+		liste.leggTil(e1);
+		liste.leggTil(e2);
+		liste.leggTil(e3);
 
 		assertEquals(e0, liste.fjern(e0));
 		assertEquals(e1, liste.fjern(e1));
@@ -147,7 +157,9 @@ public abstract class OrdnetListeADTTest {
 	 */
 	@Test
 	public final void leggTilFjernErTom() {
-		// ...Fyll ut. Legg inn elementer og fjern de
+		liste.leggTil(e0);
+        liste.fjern(e0);
+        assertEquals(liste.antall(), 0);
 	}
 
 	/**
