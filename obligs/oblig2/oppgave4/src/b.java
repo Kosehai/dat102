@@ -1,7 +1,9 @@
 public class b {    
     public static void main(String[] args) {
-        System.out.println(a(3));
-
+        int p = 10;
+        for (int i = 0; i < p; i++){
+        System.out.println("a("+(i+1)+")= " +a(i+1));
+        }
     }
     
     static int a(int n){ 

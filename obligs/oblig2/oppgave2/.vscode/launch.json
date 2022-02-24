@@ -1,0 +1,39 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Launch KlientDobbelKjedetListe",
+            "request": "launch",
+            "mainClass": "no.hvl.dat102.klient.KlientDobbelKjedetListe",
+            "projectName": "oppgave2_64c20dea",
+            "console": "integratedTerminal"
+        },
+        {
+            "type": "java",
+            "name": "Launch Current File",
+            "request": "launch",
+            "mainClass": "${file}",
+            "console": "integratedTerminal"
+        },
+        {
+            "type": "java",
+            "name": "Launch App",
+            "request": "launch",
+            "mainClass": "no.hvl.dat102.klient.App",
+            "projectName": "DobbelKjedetListeU_ebd4db9d",
+            "console": "integratedTerminal"
+        },
+        {
+            "type": "java",
+            "name": "Launch KlientDobbelKjedetListe",
+            "request": "launch",
+            "mainClass": "no.hvl.dat102.klient.KlientDobbelKjedetListe",
+            "projectName": "DobbelKjedetListeU_ebd4db9d",
+            "console": "integratedTerminal"
+        }
+    ]
+}
