@@ -45,13 +45,7 @@ public class KjedetOrdnetListe<T extends Comparable<T>>
     if (erTom()) throw new EmptyCollectionException("ordnet liste");
 
     T resultat = siste.getElement();
-    LinearNode<T> neste, forrige = null; neste = foerste;
-    while(neste.getNeste() != null){
-        forrige = neste;
-        neste = neste.getNeste();
-    }
-    forrige.setNeste(null);
-    siste = forrige;
+    fjern(resultat);
     return resultat;
   }
 
@@ -93,7 +87,7 @@ public class KjedetOrdnetListe<T extends Comparable<T>>
         return;
     }
     
-    if(foerste.getElement().compareTo(element) <= 0){
+    if(foerste.getElement().compareTo(element) >= 0){
         nynode.setNeste(foerste);
         foerste = nynode;
         antall++;
@@ -102,7 +96,7 @@ public class KjedetOrdnetListe<T extends Comparable<T>>
 
     LinearNode<T> neste, forrige = null; neste = foerste;
     
-    while(neste != null && neste.getElement().compareTo(element) >= 0){
+    while(neste != null && neste.getElement().compareTo(element) <= 0){
         forrige = neste;
         neste = neste.getNeste();
     }
@@ -163,7 +157,7 @@ public class KjedetOrdnetListe<T extends Comparable<T>>
     String outstring = "";  
     LinearNode<T> neste = foerste;
       while(neste != null){
-          outstring = neste.getElement().toString() + outstring;
+          outstring += neste.getElement().toString();
           neste = neste.getNeste();
       }
 
