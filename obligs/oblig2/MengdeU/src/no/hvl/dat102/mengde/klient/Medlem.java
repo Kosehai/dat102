@@ -25,6 +25,10 @@ public class Medlem {
         return statusIndeks;
     }
 
+    public void setStatusIndeks(int statusIndeks) {
+        this.statusIndeks = statusIndeks;
+    }
+
     public boolean passerTill(Medlem m2){
         return this.hobbyer.equals(m2.getHobbyer());
     }

@@ -1,6 +1,5 @@
 package no.hvl.dat102.mengde.klient;
 
-
 public class Datakontakt {
   private int antallMedlemer;
   private Medlem[] medlemsTabell;
@@ -42,16 +41,44 @@ public class Datakontakt {
 		medlemsTabell = hjelpetabell;
 	}
 
-    private int finnIndex(String s){
+    private int finnMedlemIndex(String s){
         for(int i = 0; i<antallMedlemer; i++){
             if(medlemsTabell[i].getNavn() == s ) return medlemsTabell[i].getStatusIndeks();
         }
         return -1;
     }
 
-    private Medlem finnPartnerFor(String medlemsnavn){
-    
+    private int finnPartnerFor(String medlemsnavn){
+        for(int i = 0; i< antallMedlemer; i++ ){
+           if(navnTilMedlem(medlemsnavn).getHobbyer() == medlemsTabell[i].getHobbyer()) return medlemsTabell[i].getStatusIndeks();
+        }
+        return -1;
     }
+    private Medlem partner(String medlemsnavn){
+        for(int i = 0; i< antallMedlemer; i++ ){
+            if(navnTilMedlem(medlemsnavn).getHobbyer() == medlemsTabell[i].getHobbyer()) return medlemsTabell[i];
+         }
+         return null;
+        
+    }
+
+    private Medlem navnTilMedlem(String medlemsnavn){
+        for (int i =0; i< antallMedlemer;i++){
+            if (medlemsnavn == medlemsTabell[i].getNavn())return medlemsTabell[i];
+        }
+        return null;
+    }
+    
+    private void tilbakestillStatusIndex (String medlemsnavn){
+       if(finnes(navnTilMedlem(medlemsnavn)) == true){
+           if(finnPartnerFor(medlemsnavn) != -1){
+               navnTilMedlem(medlemsnavn).setStatusIndeks(-1);
+               partner(medlemsnavn).setStatusIndeks(-1);
+
+           }
+        }
+    }
+
 
     
 
