@@ -128,13 +128,12 @@ public class TabellMengde<T> implements MengdeADT<T> {
 		boolean likeMengder = true;
         if(getClass() != m2.getClass() || m2 == null) return false;
         MengdeADT<T> cmp = (MengdeADT<T>) m2;
-        if(this.differens(cmp).antall() > 0){
-            likeMengder = false;
+        if(this.antall != cmp.antall()) return false;
+        for(T elm : tab){
+            if(cmp.inneholder(elm) == false) return false;
         }
 		return likeMengder;
 	}
-
-	
 
 	/*
 	 * Denne versjonen av unionen er lite effektiv
@@ -149,46 +148,58 @@ public class TabellMengde<T> implements MengdeADT<T> {
 	@Override
 
 	public MengdeADT<T> union(MengdeADT<T> m2) {
-		//TODO - Lage en mer effektiv kode
 		MengdeADT<T> begge = new TabellMengde<T>();
-		T element = null;
-		/*
-		 * ...
-		 * 
-		 */
+		for(int i=0; i<antall; i++){
+            begge.leggTil(tab[i]);
+        }
+        Iterator<T> it = m2.iterator();
+        while(it.hasNext()){
+            T elm = it.next();
+            begge.leggTil(elm);
+        }
 		return begge;
-	}//
+	}
 
 	@Override
 	public MengdeADT<T> snitt(MengdeADT<T> m2) {
 		MengdeADT<T> snittM = new TabellMengde<T>();
-		T element = null;
-		/*
-		 * ...
-		 */
+		for(T elm : tab){
+            if(m2.inneholder(elm)){
+                snittM.leggTil(elm);
+            }
+        }
 		return snittM;
 	}
 
 	@Override
 	public MengdeADT<T> differens(MengdeADT<T> m2) {
-		//TODO
 		MengdeADT<T> differensM = new TabellMengde<T>();
-		T element;
-		/*
-		 * Fyll ut
-		 * 
-		 * if (!m2.inneholder(element)) ((TabellMengde<T>) differensM).settInn(element);
-		 */
+		for(int i = 0; i<antall; i++){
+            if(m2.inneholder(tab[i]) == false){
+                differensM.leggTil(tab[i]);
+            }
+        }
+        Iterator<T> it = m2.iterator();
+        while(it.hasNext()){
+            T elm = it.next();
+            if(this.inneholder(elm) == false){
+                differensM.leggTil(elm);
+            }
+        }
 
 		return differensM;
 	}
 
 	@Override
 	public boolean undermengde(MengdeADT<T> m2) {
-		//TODO
 		boolean erUnderMengde = true;
-		// ...
-		return false;
+        for(T elm : tab){
+            if(m2.inneholder(elm) == false){
+                erUnderMengde = false;
+                break;
+            }
+        }
+		return erUnderMengde;
 	}
 
 	@Override
