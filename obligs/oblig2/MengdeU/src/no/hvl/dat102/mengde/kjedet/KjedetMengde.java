@@ -226,9 +226,15 @@ public class KjedetMengde<T> implements MengdeADT<T> {
 
 	@Override
 	public boolean undermengde(MengdeADT<T> m2) {
-		// TODO
 		boolean erUnderMengde = true;
-		// ...
+		LinearNode<T> aktuell = start;
+        while (aktuell != null) {
+            if(m2.inneholder(aktuell.getElement()) == false){
+                erUnderMengde = false;
+                break;
+            }
+            aktuell = aktuell.getNeste();
+        }
 		return erUnderMengde;
 	}
 
