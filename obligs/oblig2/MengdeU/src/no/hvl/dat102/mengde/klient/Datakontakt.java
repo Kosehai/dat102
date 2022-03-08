@@ -41,48 +41,42 @@ public class Datakontakt {
 		medlemsTabell = hjelpetabell;
 	}
 
-    private int finnMedlemIndex(String s){
+    public int finnMedlemIndex(String s){
         for(int i = 0; i<antallMedlemer; i++){
             if(medlemsTabell[i].getNavn() == s ) return medlemsTabell[i].getStatusIndeks();
         }
         return -1;
     }
 
-    private int finnPartnerFor(String medlemsnavn){
+    public int finnPartnerFor(String medlemsnavn){
         for(int i = 0; i< antallMedlemer; i++ ){
+           
            if(navnTilMedlem(medlemsnavn).getHobbyer() == medlemsTabell[i].getHobbyer()) return medlemsTabell[i].getStatusIndeks();
         }
         return -1;
     }
-    private Medlem partner(String medlemsnavn){
+    public Medlem partner(String medlemsnavn){
         for(int i = 0; i< antallMedlemer; i++ ){
-            if(navnTilMedlem(medlemsnavn).getHobbyer() == medlemsTabell[i].getHobbyer()) return medlemsTabell[i];
+            if (navnTilMedlem(medlemsnavn).getHobbyer().equals(medlemsTabell[i].getHobbyer()) == true ) return medlemsTabell[i];
          }
-         return null;
+             return null;
         
     }
 
-    private Medlem navnTilMedlem(String medlemsnavn){
+    public Medlem navnTilMedlem(String medlemsnavn){
         for (int i =0; i< antallMedlemer;i++){
             if (medlemsnavn == medlemsTabell[i].getNavn())return medlemsTabell[i];
         }
         return null;
     }
     
-    private void tilbakestillStatusIndex (String medlemsnavn){
-       if(finnes(navnTilMedlem(medlemsnavn)) == true){
-           if(finnPartnerFor(medlemsnavn) != -1){
-               navnTilMedlem(medlemsnavn).setStatusIndeks(-1);
-               partner(medlemsnavn).setStatusIndeks(-1);
-
-           }
-        }
+    public void tilbakestillStatusIndex (String medlemsnavn){
+        if (finnes(navnTilMedlem(medlemsnavn))!= false){
+        if(navnTilMedlem(medlemsnavn) != partner(medlemsnavn)){
+            navnTilMedlem(medlemsnavn).setStatusIndeks(-1);
+            partner(medlemsnavn).setStatusIndeks(-1);
+        }}
     }
-
-
-    
-
-
 
 
 }

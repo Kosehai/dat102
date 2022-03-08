@@ -1,16 +1,16 @@
 package no.hvl.dat102.mengde.klient;
 import no.hvl.dat102.mengde.adt.MengdeADT;
-import no.hvl.dat102.mengde.tabell.TabellMengde;
 
 public class Medlem {
     private String navn; 
     private MengdeADT<Hobby> hobbyer;  
     private int statusIndeks; 
 //... Konstruktør 
-    public Medlem(String navn, String hobbyer, int statusIndeks){
+    public Medlem(String navn,  MengdeADT<Hobby> hobbyer, int statusIndeks){
         this.navn = navn;
-        this.hobbyer = new TabellMengde<Hobby>();
+        this.hobbyer = hobbyer;
         this.statusIndeks = statusIndeks;
+
     }
 //... Andre metoder 
     public String getNavn() {
