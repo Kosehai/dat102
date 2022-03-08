@@ -11,7 +11,6 @@ import no.hvl.dat102.mengde.adt.MengdeADT;
 public abstract class MengdeADTtest {
     private MengdeADT<Integer> m1;
     private MengdeADT<Integer> m2;
-    private MengdeADT<Integer> m3; //For sjekker
 
     private Integer i0 = 0;
     private Integer i1 = 1;
@@ -24,7 +23,6 @@ public abstract class MengdeADTtest {
     public void setup(){
         m1 = reset();
         m2 = reset();
-        m3 = reset();
     }
 
     @Test
@@ -33,7 +31,7 @@ public abstract class MengdeADTtest {
         m1.leggTil(i1);
         m2.leggTil(i2);
         m2.leggTil(i3);
-        m3 = m1.union(m2);
+        var m3 = m1.union(m2);
         boolean sjekk = m3.inneholder(i0) && m3.inneholder(i1) && m3.inneholder(i2) && m3.inneholder(i3);
         assertEquals(true, sjekk);
     }
