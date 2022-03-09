@@ -6,11 +6,10 @@ public class Medlem {
     private MengdeADT<Hobby> hobbyer;  
     private int statusIndeks; 
 //... Konstruktør 
-    public Medlem(String navn,  MengdeADT<Hobby> hobbyer, int statusIndeks){
+    public Medlem(String navn,  MengdeADT<Hobby> hobbyer){
         this.navn = navn;
         this.hobbyer = hobbyer;
-        this.statusIndeks = statusIndeks;
-
+        statusIndeks = -1;
     }
 //... Andre metoder 
     public String getNavn() {
@@ -19,6 +18,10 @@ public class Medlem {
 
     public MengdeADT<Hobby> getHobbyer() {
         return hobbyer;
+    }
+
+    public void leggTilHobby(Hobby h){
+        hobbyer.leggTil(h);
     }
 
     public int getStatusIndeks() {
@@ -31,6 +34,15 @@ public class Medlem {
 
     public boolean passerTill(Medlem m2){
         return this.hobbyer.equals(m2.getHobbyer());
+    }
+
+    public void setHobbyer(MengdeADT<Hobby> hobbyer) {
+        this.hobbyer = hobbyer;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("\t{\"navn\": \"%s\", \"hobbier\": %s, \"index\": %d}", navn, hobbyer.toString(), statusIndeks);
     }
 
 }

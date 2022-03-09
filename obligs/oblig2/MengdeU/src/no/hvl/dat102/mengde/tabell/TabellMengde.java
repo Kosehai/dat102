@@ -210,6 +210,16 @@ public class TabellMengde<T> implements MengdeADT<T> {
 		antall++;
 	}
 
-	
+	@Override
+    public String toString() {
+        String outstring = "[";
+        for(int i=0;i<antall;i++){
+            outstring += "\"" + tab[i].toString() + "\"";
+            if(i < antall-1)
+                outstring += ", ";
+        }
+        outstring += "]";
+        return outstring;
+    }
 
 }// class
