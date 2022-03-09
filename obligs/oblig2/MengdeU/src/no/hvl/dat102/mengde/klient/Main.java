@@ -20,7 +20,7 @@ public class Main {
 
 
 
-        System.out.println(tab.partner("Arne").getNavn());
+        System.out.println(tab.partner("Arne").getHobbyer());
         
 
 
