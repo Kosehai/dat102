@@ -6,10 +6,13 @@ public class Medlem {
     private MengdeADT<Hobby> hobbyer;  
     private int statusIndeks; 
 //... Konstruktør 
-    public Medlem(String navn,  MengdeADT<Hobby> hobbyer, int statusIndeks){
+    public Medlem(String navn,MengdeADT<Hobby> hobbyer, int statusIndeks){
         this.navn = navn;
-        this.hobbyer = hobbyer;
         this.statusIndeks = statusIndeks;
+        this.hobbyer = hobbyer;
+   
+        
+      
 
     }
 //... Andre metoder 
