@@ -61,31 +61,34 @@ public class sorter {
         }
     }
 
+    /*
+    Så lenge
+    det største elementet er mindre enn elementet vi sammenligner med i sortert del, så kan vi
+    flytte elementet to plasser til høyre. Når vi finner rett plass for det største, forsetter vi som
+    vanlig med å sette inn det minste
+*/
+
     public static void sorteringVedInssettingDobbel(int[] a){
-        for (int i=0; i<a.length; i += 2){
-            int[] b = new int[2];
-            //"Sortered sub array så minste element alltid først"
-            if(a[i] < a[i+1]){
-                b[0] = a[i];
-                b[1] = a[i+1];
-            } else {
-                b[1] = a[i];
-                b[0] = a[i+1];
-            }
-            
-            int j = i - 2;
+        for (int i = 0; i < a.length-1; i++) {
+            int temp = a[i];
+            int temp2 = a[i+1];
+
+            int j = i - 1;
             boolean ferdig = false;
-            while(!ferdig && j >= 0 ){
-                if(b[0] < a[j]){
-                    a[j + 1] = a[j];
-                    a[j + 2] = a[j+1];
+            while (!ferdig && j >= 1) {
+                if (temp < a[j]) {
+                    a[j + 2] = a[j];
                     j--;
                 } else {
                     ferdig = true;
                 }
             }
-            a[j + 2] = b[0];
-            a[j + 3] = b[1];
+            if(temp > temp2){
+                temp = a[i+1];
+                temp2 = a[i];
+            }
+            a[j + 1] = temp;
+            a[j + 2] = temp2;
         }
     }
 

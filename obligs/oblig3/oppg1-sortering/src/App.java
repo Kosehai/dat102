@@ -24,7 +24,6 @@ public class App {
         printArray("Før: ", tab3);
         sorter.sorteringVedInssettingDobbel(tab3);
         printArray("Etter: ", tab3);
-
     }
 
     public static int[] nyTabell(){
